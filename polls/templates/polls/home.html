@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            background: linear-gradient(to right, #008000, #00FF00);
+            color: white;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        h1 {
+            font-size: 2.5em;
+        }
+        button {
+            background-color: white;
+            color: green;
+            border: none;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <h1>Bem-vindo à nossa página!</h1>
+        <!-- <a href="/polls/templates/polls/vote.html"><button>Clique aqui</button></a> -->
+        <a href="{% url 'polls:index' %}"><button>Clique aqui</button></a>
+    </div>
+</body>
+</html>

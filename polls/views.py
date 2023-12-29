@@ -9,6 +9,11 @@ def index(request):
     context = {'latest_question_list': latest_question_list}
     return render(request, 'polls/index.html', context)
 
+def home(request):
+    latest_question_list = Question.objects.order_by('-pub_date')[:5]
+    context = {'latest_question_list': latest_question_list}
+    return render(request, 'polls/home.html', context)
+
 
 def results(request, question_id):
     question = Question(pk=question_id)
