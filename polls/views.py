@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
-
+from .models import Poll
 from .models import Question
 
 def index(request):
@@ -18,6 +18,13 @@ def home(request):
 def results(request, question_id):
     question = Question(pk=question_id)
     return render(request, 'polls/results.html', {'question': question})
+
+
+def detail(request, poll_id):
+    poll = get_object_or_404(Poll, pk=poll_id)
+    return render(request, 'polls/detail.html', {'poll': poll})
+
+
 
 
 def vote(request, question_id):
