@@ -4,10 +4,12 @@ from django.urls import reverse
 from .models import Poll
 from .models import Question
 
+
 def index(request):
     latest_question_list = Question.objects.order_by('-pub_date')[:5]
     context = {'latest_question_list': latest_question_list}
     return render(request, 'polls/index.html', context)
+
 
 def home(request):
     latest_question_list = Question.objects.order_by('-pub_date')[:5]
@@ -23,8 +25,6 @@ def results(request, question_id):
 def detail(request, poll_id):
     poll = get_object_or_404(Poll, pk=poll_id)
     return render(request, 'polls/detail.html', {'poll': poll})
-
-
 
 
 def vote(request, question_id):
