@@ -5,21 +5,59 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Poll</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <style>
+        body {
+            /* background: url('./urubuMengao.png') center center fixed; */
+            background: linear-gradient(to right, #8B5B59, #2D0A02);
+            background-size: cover;
+            background-blur: 5px;
+        }
+
+        .container {
+            margin-top: 50px;
+            max-width: 600px;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        ul li {
+            margin-bottom: 10px;
+        }
+
+        form {
+            margin-top: 20px;
+        }
+    </style>
 </head>
 
 <body>
-    {% if latest_question_list %}
-    <ul>
-        {% for question in latest_question_list %}
-        
-        <li><a href="{% url 'polls:vote' question.id %}">{{ question.question_text }}</a></li>
 
-        {% endfor %}
-    </ul>
-    {% else %}
-    <p>No polls are available.</p>
-    {% endif %}
+    <div class="container">
+        {% if latest_question_list %}
+        <ul class="list-group">
+            {% for question in latest_question_list %}
+            <li class="list-group-item"><a href="{% url 'polls:vote' question.id %}">{{ question.question_text }}</a></li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <p class="text-muted">Nenhuma enquete iniciada.</p>
+        {% endif %}
 
-</body>
+        <form method="post" action="{% url 'polls:index' %}">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="question_text">Nova enquete: </label>
+                <input type="text" class="form-control" name="question_text" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Salvar enquete</button>
+        </form>
+    </div>
 
-</html>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIH

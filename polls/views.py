@@ -1,11 +1,17 @@
+from django.utils import timezone
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
-from .models import Poll
-from .models import Question
+from .models import Poll, Question
 
 
 def index(request):
+    if request.method == 'POST':
+        question_text = request.POST['question_text']
+        pub_date = timezone.now()
+        Question.objects.create(question_text=question_text, pub_date=pub_date)
+
+
     latest_question_list = Question.objects.order_by('-pub_date')[:5]
     context = {'latest_question_list': latest_question_list}
     return render(request, 'polls/index.html', context)
